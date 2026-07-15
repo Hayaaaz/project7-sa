@@ -1,0 +1,18 @@
+services:
+  ollama:
+    image: ollama/ollama:0.3.10
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-models:/root/.ollama
+
+  app:
+    build: ./code
+    depends_on:
+      - ollama
+    ports:
+      - "8000:8000"
+
+volumes:
+  ollama-models:
+

@@ -95,15 +95,24 @@ This proves the whole system works together.
 
 5. Model Persistence
 I tested that the model stays saved even if the container is removed.
+
 I ran:
-  
-==Code==
-  
-docker compose down
+
+==Code== 
+
+docker-compose down
 docker rm project7-sa-ollama-1
-docker compose up -d
+docker-compose up -d
+
+Then I checked the logs:
+
+==Code==
+
+docker logs project7-sa-ollama-1
+
 The model did not re-download.
-This means the named volume ollama-models is working correctly and storing the model between container restarts.
+There was no “pulling model…” message in the logs.
+This confirms that the named volume ollama-models is working correctly and storing the model between container restarts.
   -----------------------------------------------------
 
 6. Honest AI Usage

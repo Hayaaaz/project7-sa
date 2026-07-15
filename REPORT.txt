@@ -56,7 +56,7 @@ I checked my image sizes using:
 ==Code==
   
 docker images
-My app image (project7-sa-app:latest) is:
+Docker tagged my app image as :latest by default.
 •	213MB on disk
 •	51.4MB actual content size
 This is normal for a small Python/FastAPI app.

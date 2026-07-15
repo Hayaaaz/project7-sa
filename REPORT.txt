@@ -7,9 +7,10 @@ ______________________________________________________________________________-
 Here are the exact steps to run my project after cloning it from GitHub:
 
 ==Code==
+
 git clone https://github.com/Hayaaaz/project7-sa
 cd project7-sa
-docker compose up -d
+docker-compose up -d
   -----------------------------------------------------
 This starts both containers:
 •	The Ollama container (model backend)
@@ -24,6 +25,7 @@ docker compose exec ollama ollama pull llama3.2:1b
 To run my smoke test:
 
 ==Code==
+
 cd code
 bash smoke_test.sh
   -----------------------------------------------------
@@ -112,25 +114,25 @@ docker logs project7-sa-ollama-1
 
 The model did not re-download.
 There was no “pulling model…” message in the logs.
-This confirms that the named volume ollama-models is working correctly and storing the model between container restarts.
+This confirms that the named volume ollama-models is working correctly and that it stores the model between container restarts.
   -----------------------------------------------------
 
 6. Honest AI Usage
-The assignment requires explaining how I used AI.
+The assignment requires me to explain how I used AI.
 
-What I asked AI for
+## What I asked AI for
 Help understanding errors
 
 Help fixing curl issues
 
 Help explaining some points for solid understanding
 
-What the AI got wrong
+## What the AI got wrong
 It told me to check a /backend endpoint that doesn’t exist
 
 It gave me a smoke test that included a 404 check
 
-What I fixed
+## What I fixed
 I removed the /backend check
 
 I kept docker-compose.yaml in the project root
@@ -142,4 +144,4 @@ I manually tested everything in my terminal
     -----------------------------------------------------
 
 Final thoughts
-AI helped me understand things faster, but I double checked everything myself and corrected mistakes. The final project is my own work.
+AI helped me understand things faster, but I double-checked everything myself and corrected mistakes. The final project is my own work.

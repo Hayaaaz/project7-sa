@@ -1,0 +1,136 @@
+Project 7 — Ship a Model in a Box
+Student: Haya Hussein
+Course: CSC 6400
+Date: July 2026
+______________________________________________________________________________-
+1. How to Run My Project
+Here are the exact steps to run my project after cloning it from GitHub:
+
+==Code==
+git clone https://github.com/Hayaaaz/project7-sa
+cd project7-sa
+docker compose up -d
+  -----------------------------------------------------
+This starts both containers:
+•	The Ollama container (model backend)
+•	The FastAPI app container (frontend API)
+  -----------------------------------------------------
+If the model ever needs to be pulled manually:
+
+==Code==
+docker compose exec ollama ollama pull llama3.2:1b
+  -----------------------------------------------------
+  
+To run my smoke test:
+
+==Code==
+cd code
+bash smoke_test.sh
+  -----------------------------------------------------
+
+2. Proof That My Model Works
+I tested my API using this curl command:
+
+==Code==
+  
+curl -X POST http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"llama3.2:1b","messages":[{"role":"user","content":"Hello from Project 7"}]}'
+  -----------------------------------------------------
+
+The model responded with a normal message, which proves:
+•	The app container is running
+•	The Ollama container is running
+•	The model loads correctly
+•	The API endpoint works
+•	Everything is connected properly
+
+This confirms the system works end-to-end.
+  -----------------------------------------------------
+
+3. Image Size and How I Kept It Small
+I checked my image sizes using:
+
+==Code==
+  
+docker images
+My app image (project7-sa-app:latest) is:
+•	213MB on disk
+•	51.4MB actual content size
+This is normal for a small Python/FastAPI app.
+  -----------------------------------------------------
+
+The Ollama image is much larger (3.79GB) because it includes:
+•	The model runtime
+•	The downloaded model weights
+This is expected and matches the assignment instructions.
+  -----------------------------------------------------
+
+To keep my app image small, I:
+•	Used a slim Python base image
+•	Installed only the packages I needed
+•	Ordered Docker layers correctly
+•	Kept model weights in a volume instead of inside the image
+  -----------------------------------------------------
+
+4. My Smoke Test
+My smoke test script checks:
+1.	The app is alive (/health)
+2.	The model can respond to a real inference request
+3.	The script stops if anything fails
+  -----------------------------------------------------
+
+When I run:
+  
+==Code==
+  
+bash smoke_test.sh
+  
+I get:
+•	“status: ok” from the health check
+•	A real model response
+•	“Smoke test passed!” at the end
+This proves the whole system works together.
+  -----------------------------------------------------
+
+5. Model Persistence
+I tested that the model stays saved even if the container is removed.
+I ran:
+  
+==Code==
+  
+docker compose down
+docker rm project7-sa-ollama-1
+docker compose up -d
+The model did not re-download.
+This means the named volume ollama-models is working correctly and storing the model between container restarts.
+  -----------------------------------------------------
+
+6. Honest AI Usage
+The assignment requires explaining how I used AI.
+
+What I asked AI for
+Help understanding errors
+
+Help fixing curl issues
+
+Help explaining some points for solid understanding
+
+What the AI got wrong
+It told me to check a /backend endpoint that doesn’t exist
+
+It gave me a smoke test that included a 404 check
+
+What I fixed
+I removed the /backend check
+
+I kept docker-compose.yaml in the project root
+
+I updated the smoke test to only check real endpoints
+
+I manually tested everything in my terminal
+  
+    -----------------------------------------------------
+
+Final thoughts
+AI helped me understand things faster, but I double checked everything myself and corrected mistakes. The final project is my own work.

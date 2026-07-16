@@ -20,13 +20,14 @@ app (the FastAPI API)
 
 -Code
 
-*curl -X POST http://localhost:8000/v1/chat/completions \*
-  *-H "Content-Type: application/json" \*
-  *-d '{"model":"llama3.2:1b","messages":[{"role":"user","content":"Hello"}]}'*
+*curl -X POST http://localhost:8000/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -d '{"model":"llama3.2:1b","messages":[{"role":"user","content":"Hello"}]}'*
   
 You should get a normal model reply.
 
 ***Smoke test***
+
 -Code
 
 *cd code*

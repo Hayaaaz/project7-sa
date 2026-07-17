@@ -31,6 +31,7 @@ You should get a normal model reply.
 -Code
 
 *cd code*
+
 *bash smoke_test.sh*
 
 `This checks:`
